@@ -93,7 +93,7 @@ If in doubt, check migrate-storage.log for details about every step.
 
 **Tested on Proxmox VE 8.4.1**
 
-**Use as is. No warranty.**
+**Use as is. Without any warranty or guarantee.**
 
 ## Always review and test in your environment before production use.
 
