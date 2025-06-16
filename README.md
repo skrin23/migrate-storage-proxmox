@@ -28,78 +28,74 @@ Edit the following variables at the top of the script to match your environment:
 SRC_STORAGE="storage-1"          # Source storage to migrate from
 DST_STORAGE="storage-2"          # Target storage for migration
 RENAMED_STORAGE="storage-1-renamed"  # New name for source storage after migration (optional)
+```
 
-2️⃣ First run: Always use DRY-RUN
+### 2️⃣ First run: Always use DRY-RUN
 
 Before any real migration, simulate all actions and check the migration plan:
 
 ./migrate-storage.sh --dry-run
 
-    Nothing is changed or moved!
+Nothing is changed or moved! Migration plan is generated: **migrate-storage.map**. Check logs for errors/warnings: **migrate-storage.log**
 
-    Migration plan is generated: migrate-storage.map
+### 3️⃣ Production run
 
-    Check logs for errors/warnings: migrate-storage.log
-
-3️⃣ Production run
-
-After verifying the DRY-RUN, start the actual migration:
+After verifying the DRY-RUN, delete files **migrated-to-dst.list** and **migrated-back.list** and
+start the actual migration:
 
 ./migrate-storage.sh
 
-4️⃣ Customizing the Workflow
+### 4️⃣ Customizing the Workflow
 
 By default, only migration to the new storage and "empty source check" are enabled.
 To also rename storage and migrate disks back, uncomment these lines in the main() function:
 
-#rename_storage
-#migrate_back
+**#rename_storage** and **#migrate_back**
 
 Renaming of the storage only works with NFS mounts!!!
 
-5️⃣ Resuming Interrupted Migration
+### 5️⃣ Resuming Interrupted Migration
 
-    If the script is interrupted, simply run it again — already processed disks are skipped
-    automatically.
+If the script is interrupted, simply run it again — already processed disks are skipped
+automatically.
 
-    Do not delete the .list or .map files unless you want to start over.
+Do not delete the .list or .map files unless you want to start over.
 
-📄 Files Created
+### 📄 Files Created
 
-    migrate-storage.map — migration plan (do not delete between runs!)
+migrate-storage.map — migration plan (do not delete between runs!)
 
-    migrated-to-dst.list — list of disks moved to the new storage
+migrated-to-dst.list — list of disks moved to the new storage
 
-    migrated-back.list — list of disks moved back (if using this option)
+migrated-back.list — list of disks moved back (if using this option)
 
-    migrate-storage.log — full action log
+migrate-storage.log — full action log
 
-ℹ️ Notes
+### ℹ️ Notes
 
-    All actions are logged to both terminal and log file.
+All actions are logged to both terminal and log file.
 
-    Locking: Only one script instance can run at a time (flock is used).
+Locking: Only one script instance can run at a time (flock is used).
 
-    Backup: When renaming, the original storage.cfg is automatically backed up.
+Backup: When renaming, the original storage.cfg is automatically backed up.
 
-    Path and storage name are both renamed in the config when using the rename step.
+Path and storage name are both renamed in the config when using the rename step.
 
-⚠️ Safety Tips
+### ⚠️ Safety Tips
 
-    Always run a full DRY-RUN first!
+Always run a full DRY-RUN first!
 
-    Snapshot your Proxmox config (and VM disks if possible) before production migration.
+Snapshot your Proxmox config (and VM disks if possible) before production migration.
 
-    If in doubt, check migrate-storage.log for details about every step.
+If in doubt, check migrate-storage.log for details about every step.
 
-⚙️ Compatibility & Disclaimer
+### ⚙️ Compatibility & Disclaimer
 
-    **Tested on Proxmox VE 8.4.1**
+**Tested on Proxmox VE 8.4.1**
 
-    **Use as is. No warranty.**
+**Use as is. No warranty.**
 
-     Always review and test in your environment before production use.
+## Always review and test in your environment before production use.
 
-🛡 License
-
+### 🛡 License
 GNU GPL v3 — free to use, share, and improve.
