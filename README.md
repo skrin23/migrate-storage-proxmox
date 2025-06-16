@@ -57,7 +57,8 @@ Renaming of the storage only works with NFS mounts!!!
 
 5️⃣ Resuming Interrupted Migration
 
-    If the script is interrupted, simply run it again — already processed disks are skipped automatically.
+    If the script is interrupted, simply run it again — already processed disks are skipped
+    automatically.
 
     Do not delete the .list or .map files unless you want to start over.
 
