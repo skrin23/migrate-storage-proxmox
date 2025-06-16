@@ -1,63 +1,92 @@
-# migrate-storage-proxmox
-Proxmox Cluster Storage Migrator
+# Proxmox Cluster Storage Migrator
 
-Version: v1.5.7.8
+**Version:** v1.5.7.8
 
-About
+---
 
-A Bash-based automation script for safe and repeatable migration of VM and CT disks between NFS storages in a Proxmox cluster.
-Cluster-wide: Works across all nodes.
-Safe resume: Interruptible, can be re-run at any step.
-Dry-run mode: Test all steps before production use.
-Rename option: Supports storage rename after migration. Works for NFS mounts only!!!
-Full logging: All actions are logged.
+## 📝 About
 
-Usage
+A Bash automation script for **safe and repeatable migration of VM and CT disks between NFS storages in a Proxmox cluster**.
 
-1. Configuration
-Edit these variables at the top of the script to match your environment:
-SRC_STORAGE="tnas-sitel1-ssd1-1TB"        # Source storage to migrate from
-DST_STORAGE="tnas-sitel1-hdd1-2TB"        # Target storage for migration
-RENAMED_STORAGE="tnas-sitel1-ssd1-1TB-renamed"  # New name for source storage after migration (optional)
+- **Cluster-wide:** Works across all nodes
+- **Safe resume:** Interruptible and resumable at any step
+- **Dry-run mode:** Test all actions before any change
+- **Rename option:** Supports storage rename after migration
+- **Full logging:** All actions are logged
 
-2. First run: Always use DRY-RUN
-Before any real migration, check the plan and simulate all actions:
+---
+
+## 🚀 Usage
+
+### 1️⃣ Configuration
+
+Edit the following variables at the top of the script to match your environment:
+
+```bash
+SRC_STORAGE="storage-1"          # Source storage to migrate from
+DST_STORAGE="storage-2"          # Target storage for migration
+RENAMED_STORAGE="storage-1-renamed"  # New name for source storage after migration (optional)
+
+2️⃣ First run: Always use DRY-RUN
+
+Before any real migration, simulate all actions and check the migration plan:
+
 ./migrate-storage.sh --dry-run
-Nothing is changed or moved!
-Migration plan is generated: migrate-storage.map
-Check logs for errors/warnings: migrate-storage.log
 
-3. Production run:
-After verifying the DRY-RUN:
+    Nothing is changed or moved!
+
+    Migration plan is generated: migrate-storage.map
+
+    Check logs for errors/warnings: migrate-storage.log
+
+3️⃣ Production run
+
+After verifying the DRY-RUN, start the actual migration:
+
 ./migrate-storage.sh
 
-4. Customizing the workflow
-By default, only migration to the new storage and empty check is enabled.
-To also rename the storage and migrate disks back, uncomment these in the main() function:
+4️⃣ Customizing the Workflow
+
+By default, only migration to the new storage and "empty source check" are enabled.
+To also rename storage and migrate disks back, uncomment these lines in the main() function:
+
 #rename_storage
 #migrate_back
 
-5. Resuming interrupted migration
-If the script is interrupted, just run it again — already processed disks are skipped.
-Do not delete the .list or .map files unless you want to start over.
+5️⃣ Resuming Interrupted Migration
 
-Files created
+    If the script is interrupted, simply run it again — already processed disks are skipped automatically.
 
-migrate-storage.map — migration plan (do not delete between runs!)
-migrated-to-dst.list — which disks have been moved to the new storage
-migrated-back.list — which disks have been moved back (if using this option)
-migrate-storage.log — full action log
+    Do not delete the .list or .map files unless you want to start over.
 
-Notes
-All actions are logged to both terminal and log file.
-Locking: Only one script instance can run at a time (flock).
-Backup: When renaming, the original storage.cfg is backed up automatically.
-Storage path and storage name are both renamed in config when using the rename step.
+📄 Files Created
 
-Safety tips
-Always run a full DRY-RUN first!
-Snapshot your Proxmox config (and VM disks if possible) before real migration.
-If in doubt, check migrate-storage.log for details of every step.
+    migrate-storage.map — migration plan (do not delete between runs!)
 
-License
-GNU GPL v3 — free to use, share, improve.
+    migrated-to-dst.list — list of disks moved to the new storage
+
+    migrated-back.list — list of disks moved back (if using this option)
+
+    migrate-storage.log — full action log
+
+ℹ️ Notes
+
+    All actions are logged to both terminal and log file.
+
+    Locking: Only one script instance can run at a time (flock is used).
+
+    Backup: When renaming, the original storage.cfg is automatically backed up.
+
+    Path and storage name are both renamed in the config when using the rename step.
+
+⚠️ Safety Tips
+
+    Always run a full DRY-RUN first!
+
+    Snapshot your Proxmox config (and VM disks if possible) before production migration.
+
+    If in doubt, check migrate-storage.log for details about every step.
+
+🛡 License
+
+GNU GPL v3 — free to use, share, and improve.
