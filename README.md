@@ -13,7 +13,8 @@ Inspired, directed and edited by SkrIN, written by ChatGPT.
 - **Cluster-wide:** Works across all nodes
 - **Safe resume:** Interruptible and resumable at any step
 - **Dry-run mode:** Test all actions before any change
-- **Rename option:** Supports storage rename after migration
+- **Rename option:** Supports storage rename after migration - NFS support only!!! - optional
+- **Migrate back:** Supports migration of all vm/ct disks back to renamed storage - optional
 - **Full logging:** All actions are logged
 
 ---
