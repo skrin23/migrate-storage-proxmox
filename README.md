@@ -40,7 +40,7 @@ Nothing is changed or moved! Migration plan is generated: **migrate-storage.map*
 
 ### 3️⃣ Production run
 
-After verifying the DRY-RUN, delete files **migrated-to-dst.list** and **migrated-back.list** and
+After verifying the DRY-RUN, **delete files migrated-to-dst.list and migrated-back.list** and
 start the actual migration:
 
 ./migrate-storage.sh
