@@ -7,7 +7,7 @@
 ## 📝 About
 
 A Bash automation script for **safe and repeatable migration of VM and CT disks between NFS storages in a Proxmox cluster**.
-Inspired, directed and edited by SkrIN, written by ChatGPT.
+Inspired, directed, edited and tested by SkrIN, written by ChatGPT.
 
 - **Run as root:** Run on any node of the cluster
 - **Cluster-wide:** Works across all nodes
