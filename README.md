@@ -8,7 +8,7 @@
 
 A Bash automation script for **safe and repeatable migration of VM and CT disks between NFS storages in a Proxmox cluster**.
 
-- **Run as root:** run on any node of the cluster
+- **Run as root:** Run on any node of the cluster
 - **Cluster-wide:** Works across all nodes
 - **Safe resume:** Interruptible and resumable at any step
 - **Dry-run mode:** Test all actions before any change
