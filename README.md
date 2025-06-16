@@ -53,6 +53,8 @@ To also rename storage and migrate disks back, uncomment these lines in the main
 #rename_storage
 #migrate_back
 
+Renaming of the storage only works with NFS mounts!!!
+
 5️⃣ Resuming Interrupted Migration
 
     If the script is interrupted, simply run it again — already processed disks are skipped automatically.
@@ -86,6 +88,12 @@ To also rename storage and migrate disks back, uncomment these lines in the main
     Snapshot your Proxmox config (and VM disks if possible) before production migration.
 
     If in doubt, check migrate-storage.log for details about every step.
+
+⚙️ Compatibility & Disclaimer
+
+- **Tested on Proxmox VE 8.4.1**
+- **Use as is. No warranty.**
+- Always review and test in your environment before production use.
 
 🛡 License
 
