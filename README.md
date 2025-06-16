@@ -91,9 +91,11 @@ Renaming of the storage only works with NFS mounts!!!
 
 ⚙️ Compatibility & Disclaimer
 
-- **Tested on Proxmox VE 8.4.1**
-- **Use as is. No warranty.**
-- Always review and test in your environment before production use.
+    **Tested on Proxmox VE 8.4.1**
+
+    **Use as is. No warranty.**
+
+     Always review and test in your environment before production use.
 
 🛡 License
 
